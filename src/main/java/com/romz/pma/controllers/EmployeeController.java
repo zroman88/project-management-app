@@ -1,7 +1,7 @@
 package com.romz.pma.controllers;
 
-import com.romz.pma.entities.Project;
-import com.romz.pma.repositories.IProjectRepository;
+import com.romz.pma.entities.Employee;
+import com.romz.pma.repositories.IEmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,24 +13,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author roman - Project project-management
  */
 @Controller
-@RequestMapping("/projects")
-public class ProjectController {
+@RequestMapping("/employees")
+public class EmployeeController {
 
     @Autowired
-    IProjectRepository repository;
+    IEmployeeRepository repository;
 
     @GetMapping("/new")
-    public String displayProjectsForm(Model model) {
-        Project aProject = new Project();
-        model.addAttribute("project", aProject);
+    public String displayEmployeeForm(Model model) {
+        Employee employee = new Employee();
+        model.addAttribute("employee", employee);
 
-        return "new-project";
+        return "new-employee";
     }
 
     @PostMapping("/save")
-    public String saveProject(Project project, Model model) {
-        repository.save(project);
+    public String saveEmployee(Employee employee, Model model) {
+        repository.save(employee);
 
-        return "redirect:/projects/new";
+        return "redirect:/employees/new";
     }
 }

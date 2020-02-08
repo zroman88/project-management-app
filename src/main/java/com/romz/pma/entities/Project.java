@@ -1,11 +1,12 @@
 package com.romz.pma.entities;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * @author roman - Project project-management
@@ -26,5 +27,6 @@ public class Project {
     @NonNull
     private String description;
 
-
+    @OneToMany(mappedBy = "project")
+    private List<Employee> employees;
 }

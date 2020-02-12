@@ -6,6 +6,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ import java.util.List;
 @Data @RequiredArgsConstructor @NoArgsConstructor
 public class Project {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long projectId;
 
     @NonNull
@@ -27,6 +28,17 @@ public class Project {
     @NonNull
     private String description;
 
-    @OneToMany(mappedBy = "project")
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH},
+                fetch = FetchType.LAZY)
+    @JoinTable(name = "project_employee",
+            joinColumns = @JoinColumn(name = "project_id"),
+            inverseJoinColumns = @JoinColumn(name = "employee_id")
+    )
     private List<Employee> employees;
+
+    public void addEmployee(Employee employee) {
+        if (employees == null) employees = new ArrayList<>();
+
+        employees.add(employee);
+    }
 }

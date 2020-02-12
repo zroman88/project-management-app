@@ -1,5 +1,6 @@
 package com.romz.pma.controllers;
 
+import com.romz.pma.dto.IEmployeeProject;
 import com.romz.pma.entities.Employee;
 import com.romz.pma.entities.Project;
 import com.romz.pma.dao.IEmployeeRepository;
@@ -25,10 +26,10 @@ public class HomeController {
     @GetMapping("/")
     public String getMapping(Model model) {
         List<Project> projects = projectRepository.findAll();
-        List<Employee> employees = employeeRepository.findAll();
-
         model.addAttribute("projects", projects);
-        model.addAttribute("employees", employees);
+
+        List<IEmployeeProject> employeesProjectCnt = employeeRepository.employeesProjects();
+        model.addAttribute("employeesListProjectsCnt", employeesProjectCnt);
 
         return "main/home";
     }

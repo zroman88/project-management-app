@@ -39,10 +39,12 @@ public class ProjectController {
     @GetMapping("/new")
     public String displayProjectsForm(Model model) {
         Project aProject = new Project();
-        List<Employee> allEmployees = empRepo.findAll();
-
         model.addAttribute("project", aProject);
+
+
+        List<Employee> allEmployees = empRepo.findAll();
         model.addAttribute("allEmployees", allEmployees);
+
 
         return "projects/new-project";
     }

@@ -13,10 +13,13 @@ import java.util.List;
  * @author roman - Project project-management
  */
 @Entity
-@Data @RequiredArgsConstructor @NoArgsConstructor
+@Data
+@RequiredArgsConstructor
+@NoArgsConstructor
 public class Project {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "project_seq")
+    @SequenceGenerator(name = "project_seq", sequenceName = "project_seq", allocationSize = 1, initialValue = 1)
     private long projectId;
 
     @NonNull
@@ -29,7 +32,7 @@ public class Project {
     private String description;
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH},
-                fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY)
     @JoinTable(name = "project_employee",
             joinColumns = @JoinColumn(name = "project_id"),
             inverseJoinColumns = @JoinColumn(name = "employee_id")

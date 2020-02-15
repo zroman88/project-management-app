@@ -8,7 +8,9 @@ import com.romz.pma.entities.Employee;
 import com.romz.pma.entities.Project;
 import com.romz.pma.dao.IEmployeeRepository;
 import com.romz.pma.dao.IProjectRepository;
+import com.romz.pma.springExample.Car;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,16 +24,20 @@ import java.util.Map;
  */
 @Controller
 public class HomeController {
-    @Autowired
-    IProjectRepository projectRepository;
+    final IProjectRepository projectRepository;
 
-    @Autowired
-    IEmployeeRepository employeeRepository;
+    final IEmployeeRepository employeeRepository;
+
+    @Value(value = "${version}")
+    private String version;
+
+    public HomeController(IProjectRepository projectRepository, IEmployeeRepository employeeRepository) {
+        this.projectRepository = projectRepository;
+        this.employeeRepository = employeeRepository;
+    }
 
     @GetMapping("/")
     public String getMapping(Model model) throws JsonProcessingException {
-//        Map<String, Object> map = new HashMap<String, Object>();
-
         List<Project> projects = projectRepository.findAll();
         model.addAttribute("projects", projects);
 
@@ -46,6 +52,9 @@ public class HomeController {
 
         List<IEmployeeProject> employeesProjectCnt = employeeRepository.employeesProjects();
         model.addAttribute("employeesListProjectsCnt", employeesProjectCnt);
+
+        // Grab configuration from our yaml file
+        model.addAttribute("version", version);
 
         return "main/home";
     }

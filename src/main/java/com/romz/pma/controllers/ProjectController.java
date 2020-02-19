@@ -4,6 +4,8 @@ import com.romz.pma.dao.IEmployeeRepository;
 import com.romz.pma.entities.Employee;
 import com.romz.pma.entities.Project;
 import com.romz.pma.dao.IProjectRepository;
+import com.romz.pma.services.EmployeeService;
+import com.romz.pma.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,10 +25,10 @@ import java.util.List;
 public class ProjectController {
 
     @Autowired
-    IProjectRepository projectRepository;
+    ProjectService projectRepository;
 
     @Autowired
-    IEmployeeRepository empRepo;
+    EmployeeService empRepo;
 
     @GetMapping
     public String displayProjects(Model model) {

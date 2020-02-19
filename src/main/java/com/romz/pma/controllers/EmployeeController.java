@@ -2,6 +2,7 @@ package com.romz.pma.controllers;
 
 import com.romz.pma.entities.Employee;
 import com.romz.pma.dao.IEmployeeRepository;
+import com.romz.pma.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +20,7 @@ import java.util.List;
 public class EmployeeController {
 
     @Autowired
-    IEmployeeRepository repository;
+    EmployeeService repository;
 
     @GetMapping
     public String displayEmployees(Model model) {

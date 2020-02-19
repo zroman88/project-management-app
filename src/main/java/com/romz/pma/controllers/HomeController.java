@@ -8,6 +8,8 @@ import com.romz.pma.entities.Employee;
 import com.romz.pma.entities.Project;
 import com.romz.pma.dao.IEmployeeRepository;
 import com.romz.pma.dao.IProjectRepository;
+import com.romz.pma.services.EmployeeService;
+import com.romz.pma.services.ProjectService;
 import com.romz.pma.springExample.Car;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,14 +26,14 @@ import java.util.Map;
  */
 @Controller
 public class HomeController {
-    final IProjectRepository projectRepository;
+    final ProjectService projectRepository;
 
-    final IEmployeeRepository employeeRepository;
+    final EmployeeService employeeRepository;
 
     @Value(value = "${version}")
     private String version;
 
-    public HomeController(IProjectRepository projectRepository, IEmployeeRepository employeeRepository) {
+    public HomeController(ProjectService projectRepository, EmployeeService employeeRepository) {
         this.projectRepository = projectRepository;
         this.employeeRepository = employeeRepository;
     }

@@ -4,22 +4,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.romz.pma.dto.IEmployeeProject;
 import com.romz.pma.dto.IProjectCount;
-import com.romz.pma.entities.Employee;
 import com.romz.pma.entities.Project;
-import com.romz.pma.dao.IEmployeeRepository;
-import com.romz.pma.dao.IProjectRepository;
 import com.romz.pma.services.EmployeeService;
 import com.romz.pma.services.ProjectService;
-import com.romz.pma.springExample.Car;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author roman - Project project-management

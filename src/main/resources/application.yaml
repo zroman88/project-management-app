@@ -1,28 +1,28 @@
-#spring:
-#  datasource:
-#    url: jdbc:postgresql://localhost:5432/pma-springbootdb
-#    username: postgres
-#    password: adm!nd42
-#    initialization-mode: never
-#  jpa:
-#    hibernate:
-#      ddl-auto: none
-#    show-sql: true
-#  thymeleaf:
-#    cache: false
-version: 3.0.0
 spring:
-  h2:
-    console:
-      enabled: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/pma-springbootdb
+    username: postgres
+    password: adm!nd42
+    initialization-mode: never
   jpa:
+    hibernate:
+      ddl-auto: none
     show-sql: true
-    open-in-view: true
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQL92Dialect
   thymeleaf:
     cache: false
-logging:
-  level:
-    com.romz.pma : debug
+version: 3.0.0
+#spring:
+#  h2:
+#    console:
+#      enabled: true
+#  jpa:
+#    show-sql: true
+#    open-in-view: true
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQL92Dialect
+#  thymeleaf:
+#    cache: false
+#logging:
+#  level:
+#    com.romz.pma : debug

@@ -52,7 +52,7 @@ public class ProjectController {
     }
 
     @PostMapping("/save")
-    public String saveProject(Project project, Model model) {
+    public String saveProject(Project project) {
         projectRepository.save(project);
 
         // Imtiaz's way

@@ -1,12 +1,8 @@
 package com.romz.pma.services;
 
 import com.romz.pma.dao.IEmployeeRepository;
-import com.romz.pma.dao.IProjectRepository;
 import com.romz.pma.dto.IEmployeeProject;
 import com.romz.pma.entities.Employee;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

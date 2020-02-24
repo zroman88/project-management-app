@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.sql.DataSource;
 
@@ -22,27 +23,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     DataSource dataSource;
 
+    @Autowired
+    BCryptPasswordEncoder encoder;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource)
-            .withDefaultSchema()
-            .passwordEncoder(getPasswordEnc())
-            .withUser("myuser")
-            .password("pass")
-            .roles("USER")
-            .and()
-            .withUser("roman")
-            .password("pass")
-            .roles("USER")
-            .and()
-            .withUser("manager")
-            .password(getPasswordEnc().encode("pass"))
-            .roles("ADMIN");
-    }
-
-    @Bean
-    public PasswordEncoder getPasswordEnc() {
-        return new BCryptPasswordEncoder();
+            .usersByUsernameQuery("SELECT username, password, enabled FROM user_accounts WHERE username=?")
+            .authoritiesByUsernameQuery("SELECT username, role FROM user_accounts WHERE username=?")
+            .passwordEncoder(encoder);
     }
 
     @Override
@@ -50,10 +39,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
             .antMatchers("/projects/new").hasRole("ADMIN")
             .antMatchers("/projects/save").hasRole("ADMIN")
-            .antMatchers("/h2_console/**").permitAll()
-            .antMatchers("/").authenticated().and().formLogin();
+            .antMatchers("/employees/new").hasRole("ADMIN")
+            .antMatchers("/employees/save").hasRole("ADMIN")
+            .antMatchers("/", "/**").permitAll()
+            .and()
+            .formLogin();
 
-        http.csrf().disable();
-        http.headers().frameOptions().disable();
+//        http.csrf().disable();
+//        http.headers().frameOptions().disable();
     }
 }

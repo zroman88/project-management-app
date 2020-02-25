@@ -1,7 +1,9 @@
 package com.romz.pma.controllers;
 
-import com.romz.pma.dao.IUserAccount;
 import com.romz.pma.entities.UserAccount;
+import com.romz.pma.services.UserAccountService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class SecurityController {
+    @Autowired
+    BCryptPasswordEncoder encoder;
 
-    IUserAccount accountRepo;
+    @Autowired
+    UserAccountService accountService;
 
     @GetMapping("/register")
     public String register(Model model) {
@@ -21,11 +26,15 @@ public class SecurityController {
 
         model.addAttribute("userAccount", userAccount);
 
-        return "register";
+        return "/security/register";
     }
 
     @PostMapping("/register/save")
-    public void save(Model model) {
+    public String save(Model model, UserAccount userAccount) {
 
+        userAccount.setPassword(encoder.encode(userAccount.getPassword()));
+        accountService.save(userAccount);
+
+        return "redirect:/";
     }
 }

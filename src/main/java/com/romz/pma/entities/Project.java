@@ -1,9 +1,6 @@
 package com.romz.pma.entities;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -37,6 +34,7 @@ public class Project {
             joinColumns = @JoinColumn(name = "project_id"),
             inverseJoinColumns = @JoinColumn(name = "employee_id")
     )
+    @ToString.Exclude
     private List<Employee> employees;
 
     public void addEmployee(Employee employee) {

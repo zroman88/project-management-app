@@ -1,7 +1,5 @@
 package com.romz.pma.dto;
 
-import java.math.BigInteger;
-
 /**
  * @author Roman - Project project-management
  */

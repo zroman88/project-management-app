@@ -12,11 +12,12 @@ import javax.persistence.*;
 @Entity
 @Data
 @RequiredArgsConstructor
+@Table(name = "user_accounts")
 public class UserAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_accounts_seq")
     @SequenceGenerator(name = "user_accounts_seq", sequenceName = "user_accounts_seq", allocationSize = 1, initialValue = 1)
-    private int userId;
+    private long userId;
 
     @Column(name = "username")
     private String userName;

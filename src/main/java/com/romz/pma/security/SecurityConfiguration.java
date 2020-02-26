@@ -28,9 +28,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication() //.dataSource(dataSource)
+        auth.jdbcAuthentication()
             .usersByUsernameQuery("SELECT username, password, enabled FROM user_accounts WHERE username=?")
             .authoritiesByUsernameQuery("SELECT username, role FROM user_accounts WHERE username=?")
+            .dataSource(dataSource)
             .passwordEncoder(encoder);
     }
 
@@ -45,7 +46,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .and()
             .formLogin();
 
-        
+
 //        http.headers().frameOptions().disable();
     }
 }

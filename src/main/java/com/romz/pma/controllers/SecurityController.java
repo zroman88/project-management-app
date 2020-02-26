@@ -26,7 +26,7 @@ public class SecurityController {
 
         model.addAttribute("userAccount", userAccount);
 
-        return "/security/register";
+        return "security/register";
     }
 
     @PostMapping("/register/save")

@@ -1,7 +1,6 @@
 package com.romz.pma.entities;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
@@ -27,6 +26,8 @@ public class UserAccount {
     private String password;
 
     private String role;
+
+    private String token;
 
     private boolean enabled = true;
 }

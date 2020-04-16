@@ -2,12 +2,14 @@ package com.romz.pma.api.controllers;
 
 import com.romz.pma.entities.Employee;
 import com.romz.pma.services.EmployeeService;
+import com.romz.pma.services.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.util.StringUtils;
 
 import javax.validation.Valid;
 
@@ -19,6 +21,9 @@ import javax.validation.Valid;
 public class EmployeeApiController {
     @Autowired
     EmployeeService employeeService;
+
+    @Autowired
+    UserAccountService accountService;
 
     @GetMapping
     public Iterable<Employee> getEmployees() {

@@ -8,8 +8,18 @@ spring:
     hibernate:
       ddl-auto: none
     show-sql: true
+
+    properties:
+      javax:
+        persistence:
+          validation:
+            mode: none
   thymeleaf:
     cache: false
+  mvc:
+    dispatch-options-request: true
+
+
 version: 3.0.0
 #spring:
 #  h2:

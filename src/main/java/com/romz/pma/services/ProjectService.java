@@ -6,6 +6,7 @@ import com.romz.pma.entities.Project;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author roman - Project project-management
@@ -18,15 +19,23 @@ public class ProjectService {
         this.projectRepository = projectRepository;
     }
 
-    public List<Project> findAll() {
+    public Iterable<Project> findAll() {
         return projectRepository.findAll();
     }
 
-    public void save(Project project) {
-        projectRepository.save(project);
+    public Project save(Project project) {
+        return projectRepository.save(project);
     }
 
     public List<IProjectCount> projectsCount() {
         return projectRepository.projectsCount();
+    }
+
+    public Optional<Project> findById(Long id) {
+        return projectRepository.findById(id);
+    }
+
+    public void deleteById(Long id) {
+        projectRepository.deleteById(id);
     }
 }

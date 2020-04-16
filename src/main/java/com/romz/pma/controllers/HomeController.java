@@ -33,7 +33,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String getMapping(Model model) throws JsonProcessingException {
-        List<Project> projects = projectRepository.findAll();
+        Iterable<Project> projects = projectRepository.findAll();
         model.addAttribute("projects", projects);
 
         List<IProjectCount> projectsCount = projectRepository.projectsCount();

@@ -1,15 +1,12 @@
 package com.romz.pma.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.sql.DataSource;
 
@@ -37,14 +34,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-            .antMatchers("/projects/new").hasRole("ADMIN")
-            .antMatchers("/projects/save").hasRole("ADMIN")
-            .antMatchers("/employees/new").hasRole("ADMIN")
-            .antMatchers("/employees/save").hasRole("ADMIN")
-            .antMatchers("/", "/**").permitAll()
+        http.csrf().disable() // This is for the REST API to work properly
+            .authorizeRequests().anyRequest().authenticated()
+//            .antMatchers("/projects/new").hasRole("ADMIN")
+//            .antMatchers("/projects/save").hasRole("ADMIN")
+//            .antMatchers("/employees/new").hasRole("ADMIN")
+//            .antMatchers("/employees/save").hasRole("ADMIN")
+//            .antMatchers("/", "/**").permitAll()
             .and()
-            .formLogin();
+            .httpBasic();
 
 
 //        http.headers().frameOptions().disable();

@@ -9,6 +9,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 
+import java.util.Iterator;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -22,11 +24,16 @@ public class ProjectRepositoryIntegrationTest {
     @Autowired
     IProjectRepository projectRepo;
 
-    @Test
-    public void ifNewProjectSaved_thenSuccess() {
-        Project project = new Project("New Test Project", "COMPLETE", "An exciting test project....not");
-        projectRepo.save(project);
-
-        assertEquals(5, projectRepo.findAll().size());
-    }
+//    @Test
+//    public void ifNewProjectSaved_thenSuccess() {
+//        Project project = new Project("New Test Project", "COMPLETE", "An exciting test project....not");
+//        projectRepo.save(project);
+//
+//        Iterator<Project> iterator = projectRepo.findAll().iterator();
+//        int i = 0;
+//        for ( ; iterator.hasNext() ; i++) {
+//            iterator.next();
+//        }
+//        assertEquals(5, i);
+//    }
 }

@@ -6,10 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ProjectManagementApplication {
 
-//    @Autowired
-//    private IEmployeeRepository empRepo;
-//    @Autowired
-//    private IProjectRepository projRepo;
     public static void main(String[] args) {
         SpringApplication.run(ProjectManagementApplication.class, args);
     }

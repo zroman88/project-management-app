@@ -1,30 +1,39 @@
 package com.romz.pma.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.romz.pma.validators.UniqueValue;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
  * @author roman - Project project-management
  */
+
 @Entity
 @Data
-@RequiredArgsConstructor
-@NoArgsConstructor
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_seq")
     @SequenceGenerator(name = "employee_seq", sequenceName = "employee_seq", allocationSize = 1, initialValue = 1)
     private long employeeId;
 
-    @NonNull
+    @NotNull
+    @Size(min = 2, max = 50)
     private String firstName;
 
-    @NonNull
+    @NotNull
+    @Size(min = 1, max = 50)
     private String lastName;
 
-    @NonNull
+    @NotNull
+    @Email
+    @UniqueValue
     private String email;
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH},
@@ -34,5 +43,6 @@ public class Employee {
             inverseJoinColumns = @JoinColumn(name = "project_id")
     )
     @ToString.Exclude
+    @JsonIgnore
     private List<Project> projects;
 }

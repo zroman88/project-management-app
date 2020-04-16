@@ -1,9 +1,7 @@
 package com.romz.pma.controllers;
 
-import com.romz.pma.dao.IEmployeeRepository;
 import com.romz.pma.entities.Employee;
 import com.romz.pma.entities.Project;
-import com.romz.pma.dao.IProjectRepository;
 import com.romz.pma.services.EmployeeService;
 import com.romz.pma.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,7 +28,7 @@ public class ProjectController {
 
     @GetMapping
     public String displayProjects(Model model) {
-        List<Project> projects = projectRepository.findAll();
+        Iterable<Project> projects = projectRepository.findAll();
         model.addAttribute("projects", projects);
 
         return "projects/list-projects";
@@ -44,7 +40,7 @@ public class ProjectController {
         model.addAttribute("project", aProject);
 
 
-        List<Employee> allEmployees = empRepo.findAll();
+        Iterable<Employee> allEmployees = empRepo.findAll();
         model.addAttribute("allEmployees", allEmployees);
 
 
